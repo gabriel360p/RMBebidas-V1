@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>RMBEBIDAS</title>
+</head>
+<body>
+
+{% block nav %} 
+<!-- esta sendo puxado -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <nav>
+        <ol class="breadcrumb"> 
+          <li class="breadcrumb-item">
+            <a href="{% url 'rmbebidas:tpainel' %}">Estante</a>    
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'rmbebidas:tproduto' %}">Adicionar Produto</a>    
+          </li>
+          <li class="breadcrumb-item">
+            <a href="">Novo Usuário</a>    
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'rmbebidas:index' %}">Sair</a>    
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock nav %}
+
+{% block conteudo %}
+<!-- qualquer coisa pode ser colocado aqui dentro -->
+<!-- espaço para o conteudo - sobreescrita-->
+{% endblock conteudo %}
+
+
+</body>
+</html>
