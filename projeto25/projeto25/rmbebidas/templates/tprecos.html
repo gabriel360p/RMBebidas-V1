@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>RMBEBIDAS</title>
+
+</head>
+<body>
+
+{% block nav %}
+{{block.super}}
+{% endblock nav %}
+
+{% block conteudo %}
+<div class="container-fluid">		
+	<table class="table table-sm table-bordered">
+		<thead>
+			<tr>
+				<th>
+					Marca
+				</th>
+				<th>
+					Produto
+				</th>
+				<th>
+					Estoque
+				</th>
+				<th>
+					Preço
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for produto in PRODUTO %}
+			<tr class="table-active">
+				<td>
+					{{produto.pro_marca}}
+				</td>
+				<td>
+					{{produto.pro_nome}}
+				</td>
+				<td>
+					{{produto.pro_quantidade}}
+				</td>
+				<td>
+					{{produto.pro_preco}}
+				</td>
+				<td>
+					<div class="container-fluid" style="display: flex; justify-content: center; align-items: center;">
+					<a href="{% url 'rmbebidas:defbtnverproduto' produto.pro_codigo %}">
+						<button class="btn btn-primary">
+							Abrir
+						</button>
+					</a>
+				</div>
+				</td>
+			</tr>
+		{% endfor %}	
+		</tbody>
+	</table>
+</div>
+
+{% endblock conteudo %}
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>RMBEBIDAS</title>
+</head>
+<body>
+
+{% block nav %}
+{{ block.super }}
+{% endblock nav %}
+
+{% block conteudo %}
+<div class="container-fluid" style="display: flex; justify-content: center; align-items: center;">
+	{{vazioAlert}}
+	{{existProdutoAlert}}
+</div>
+
+<div class="container-fluid">
+
+	<div class="card-columns">
+
+{% for produtos in PRODUTO %}
+	<div class="card border-dark mb-3">
+	  	<div class="card-body text-dark">
+		    <h5 class="card-title">{{produtos.pro_nome}}</h5>
+		    <p class="card-text">{{produtos.pro_descricao}}</p>
+		    <div class="card-footer">
+		      <small class="text-muted">Marca: {{produtos.pro_marca}}</small>
+		    <hr>
+		      <small class="text-muted">Fornecedor: {{produtos.pro_fornecedor}}</small>
+		    <hr>
+		      <small class="text-muted">Estoque: {{produtos.pro_quantidade}}</small>
+		    <hr>
+		      <small class="text-muted">Preço: R${{produtos.pro_preco}}</small>
+		    </div>
+		    	
+		    <a href="{% url 'rmbebidas:defbtnverproduto' produtos.pro_codigo %}">
+				<button type="button" class="btn btn-outline-dark">Abrir</button>
+			</a>
+	  	</div>
+  	</div>
+
+{% endfor %}
+	</div>
+
+</div>
+
+{% endblock conteudo %}
+
+</body>
+</html>

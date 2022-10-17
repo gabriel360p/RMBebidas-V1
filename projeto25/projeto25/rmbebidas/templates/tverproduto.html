@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>RMBEBIDAS</title>
+</head>
+<body>
+{% block nav %}
+{{block.super}}
+{% endblock nav %}
+
+{% block conteudo %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+
+		<div class="col-md-4">
+			<form method="POST" action="{% url 'rmbebidas:defbtneditproduto' PRODUTO.pro_codigo %}">
+			  {% csrf_token %}
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="inputEmail4">Marca</label>
+			      <input type="text" class="form-control" id="inputEmail4" placeholder="Marca do Produto" required name="marca" value="{{PRODUTO.pro_marca}}" >
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="inputPassword4">Nome</label>
+			      <input type="text" class="form-control" id="inputPassword4" required placeholder="Nome do Produto" name="nome" value="{{PRODUTO.pro_nome}}">
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="inputCity">Quantidade</label>
+			      <input type="number" class="form-control" id="inputCity" required placeholder="Estoque" name="quantidade" value="{{PRODUTO.pro_quantidade}}">
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="inputState">Fornecedor</label>
+			      <input type="text" class="form-control" id="inputZip" required placeholder="Fornecedor" name="fornecedor" value="{{PRODUTO.pro_fornecedor}}">
+
+			    </div>
+			    <div class="form-group col-md-2">
+			      <label for="inputZip">Preço</label>
+			      <input type="decimal" class="form-control" id="inputZip" required placeholder="Preço" name="preco" value="{{PRODUTO.pro_preco}}">
+			    </div>
+			  </div>
+				<div class="form-group">
+			    	<label for="exampleFormControlTextarea1">Descrição do Produto </label>
+			    	<input class="form-control" id="exampleFormControlTextarea1" name="descricao" value="{{PRODUTO.pro_descricao}}" rows="3"></input>
+				</div>	
+			  <input type="submit" value="Salvar" class="btn btn-primary">
+			</form>
+		</div>
+
+		<div class="col-md-4">
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid" style="display:flex; justify-content:center; align-items:center;">	
+	<a href="{% url 'rmbebidas:defbtndellproduto' PRODUTO.pro_codigo %}">
+	  <input type="submit" value="Excluir Produto" class="btn btn-danger">
+	</a>
+</div>
+
+<div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
+	{{getERROR2}}
+</div>
+{% endblock conteudo %}
+
+</body>
+</html>
