@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+<<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+{% block nav %}
+{{block.super}}
+{% endblock nav %}
+
+{% block conteudo %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>
+							Nome do Funcionário
+						</th>
+						<th>
+							Sobrenome do Funcionário
+						</th>
+						<th>
+							Email do Funcionário
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+
+					{% for funcionario in FUNCIONARIO %}
+					<tr class="table-success">
+						<td>
+							{{funcionario.usu_nome}}
+						</td>
+						<td>
+							{{funcionario.usu_sobrenome}}
+						</td>
+						<td>
+							{{funcionario.usu_email}}
+						</td>
+						<td>
+							<a href=" {% url 'rmbebidas:teditusuario' funcionario.usu_codigo %} ">
+								<button class="btn btn-primary">
+									Editar
+								</button>
+							</a>
+							<a href="{% url 'rmbebidas:defbtndellusuario' funcionario.usu_codigo %}">
+								<button class="btn btn-danger">
+									Desativar
+								</button>
+							</a>
+						</td>
+					</tr>
+					{% endfor %}
+
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{{DeletErrorAlert}}
+{{DeletSucessesAlert}}
+{% endblock conteudo %}
+
+</body>
+</html>
+
+

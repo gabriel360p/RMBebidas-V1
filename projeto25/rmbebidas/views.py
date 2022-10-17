@@ -18,9 +18,20 @@ def viewtcadusuarios(request):
 def viewtproduto(request):
 	return render(request,'tproduto.html')
 
+def viewtprecos(request):
+	produtos=TbProdutos.objects.all()
+	return render(request,'tprecos.html',{'PRODUTO':produtos})
+
 def viewtverproduto(request):
 	return render(request,'tverproduto.html')
 
+def viewtusuarios(request):
+	funcionario=TbUsuarios.objects.all()
+	return render(request,'tusuarios.html',{'FUNCIONARIO':funcionario})
+
+def viewteditusuario(request,id):
+	funcionario=TbUsuarios.objects.get(usu_codigo=id)
+	return render(request,'teditusuario.html',{'FUNCIONARIO':funcionario})
 
 def viewtpainel(request):
 	produtos=TbProdutos.objects.all()
@@ -73,10 +84,6 @@ def defbtnverproduto(request,id):
 	produtos=TbProdutos.objects.all()
 	return render(request,'tverproduto.html',{'PRODUTO':produto})
 
-	# produtos=TbProdutos.objects.all()
-	# return render(request,'tpainel.html',{'existProdutoAlert':"Produto não encontrado",'PRODUTO':produtos})
-
-
 def defbtneditproduto(request,id):
 	if request.method=="POST":
 		produto=TbProdutos.objects.get(pro_codigo=id) #pegando o produto através da sua chave
@@ -121,3 +128,30 @@ def defbtncadusuarios (request):
 			return render(request,'tcadusuarios.html',{'cadSucesso':"Usuario Cadastrado",'keepEmail':email,'keepSenha':senha,'keepNome':nome,'keepSobrenome':sobrenome})
 	else:
 		return render(request,'tproduto.html',{'getERROR3':"Acesso GET negado"})
+
+
+def defbtndellusuario(request,id):
+	try:
+		dellfuncionario=TbUsuarios.objects.get(usu_codigo=id)
+		dellfuncionario.delete()
+
+		funcionario=TbUsuarios.objects.all()
+		return render(request,'tusuarios.html',{'FUNCIONARIO':funcionario})
+	except:
+		funcionario=TbUsuarios.objects.all()
+		return render(request,'tusuarios.html',{'FUNCIONARIO':funcionario})
+
+
+def defbtneditusuario(request,id):
+	if request.method=="POST":
+		editfuncionario=TbUsuarios.objects.get(usu_codigo=id)
+		editfuncionario.usu_nome = request.POST.get('nome')
+		editfuncionario.usu_sobrenome = request.POST.get('sobrenome')
+		editfuncionario.usu_email = request.POST.get('email')
+		editfuncionario.usu_senha = request.POST.get('senha')
+		editfuncionario.save()
+		funcionario=TbUsuarios.objects.all()
+		return render(request,'tusuarios.html',{'FUNCIONARIO':funcionario})
+	else:		
+		funcionario=TbUsuarios.objects.get(usu_codigo=id)
+		return render(request,'teditusuario.html',{'FUNCIONARIO':funcionario,'getERROR4':"Acesso GET negado"})
